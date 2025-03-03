@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيانات الطالب - كليات بريدة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="logo.gif" alt="شعار كليات بريدة">
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">التقويم الجامعي</a></li>
+            <li><a href="#">المقررات المطروحة</a></li>
+            <li><a href="#">الخطط الدراسية</a></li>
+            <li><a href="#">طلب قبول</a></li>
+            <li><a href="#">التحقق من وثيقة التخرج</a></li>
+        </ul>
+    </nav>
+
+    <div class="student-info-container">
+        <h2>بيانات الطالب</h2>
+        <table>
+            <tr><th>الاسم</th><td id="student-name"></td></tr>
+            <tr><th>الدرجة</th><td id="student-degree"></td></tr>
+            <tr><th>التخصص</th><td id="student-major"></td></tr>
+            <tr><th>نوع الدراسة</th><td id="study-type"></td></tr>
+            <tr><th>حالة القبول</th><td id="admission-status"></td></tr>
+        </table>
+        <button onclick="confirmAdmission()">تأكيد القبول</button>
+        <button onclick="rejectAdmission()" class="cancel">رفض القبول</button>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة - لدى كليات بريدة</p>
+        <p>تم تطوير الموقع بواسطة كليات بريدة (ATS)</p>
+    </footer>
+
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+
+        const studentData = JSON.parse(localStorage.getItem("studentData"));
+
+        document.getElementById("student-name").textContent = studentData.name;
+        document.getElementById("student-degree").textContent = studentData.degree;
+        document.getElementById("study-type").textContent = studentData.studyType;
+        document.getElementById("admission-status").textContent = studentData.status;
+        document.getElementById("student-major").textContent = studentData.major;
+
+        function confirmAdmission() {
+            localStorage.setItem("admissionConfirmed", "true");
+            window.location.href = "تفاصيل_السداد.html";
+        }
+
+        function rejectAdmission() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("studentData");
+            alert("تم رفض القبول.");
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

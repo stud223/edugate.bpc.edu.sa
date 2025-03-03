@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - كليات بريدة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="logo.gif" alt="شعار كليات بريدة">
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">التقويم الجامعي</a></li>
+            <li><a href="#">المقررات المطروحة</a></li>
+            <li><a href="#">الخطط الدراسية</a></li>
+            <li><a href="#">طلب قبول</a></li>
+            <li><a href="#">التحقق من وثيقة التخرج</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-container">
+        <h2>تسجيل الدخول</h2>
+        <input type="text" id="requestNumber" placeholder="رقم الطلب">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button onclick="login()">تسجيل الدخول</button>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة - لدى كليات بريدة</p>
+        <p>تم تطوير الموقع بواسطة كليات بريدة (ATS)</p>
+    </footer>
+
+    <script>
+        function login() {
+            const requestNumber = document.getElementById("requestNumber").value;
+            const password = document.getElementById("password").value;
+
+            if (requestNumber === "409560922" && password === "1112785686") {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("studentData", JSON.stringify({
+                    name: "سويلم محمد اسليم العنبر",
+                    degree: "دبلوم",
+                    studyType: "عن بعد",
+                    status: "مقبول",
+                    major: "محاسبة"
+                }));
+                window.location.href = "confirm.html";
+            } else {
+                document.getElementById("error-message").textContent = "رقم الطلب أو كلمة المرور غير صحيحة";
+            }
+        }
+    </script>
+
+</body>
+</html>
